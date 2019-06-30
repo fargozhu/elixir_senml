@@ -1,8 +1,3 @@
-[![Build Status](https://travis-ci.com/calipo/elixir_senml.svg?branch=master)](https://travis-ci.com/calipo/elixir_senml) 
-[![codecov](https://codecov.io/gh/calipo/elixir_senml/branch/master/graph/badge.svg)](https://codecov.io/gh/calipo/elixir_senml)
-
-
-
 # ElixirSenml
 
 **TODO: Add description**
@@ -23,5 +18,4 @@ end
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/elixir_senml](https://hexdocs.pm/elixir_senml).
-
 

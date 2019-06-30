@@ -9,8 +9,8 @@ defmodule ElixirSenml.ResolverStatus do
         bu: nil,
         bv: nil,
         bs: nil,
-        bver: nil,
-        resolved: MapSet.new(),
+        bver: nil
+        #resolved: MapSet.new(),
     )    
 
     # resolve Senml payload
@@ -22,10 +22,7 @@ defmodule ElixirSenml.ResolverStatus do
     end
         
     # In case the Poison.decode returns an error
-    def resolve({ :error, _ }), do: { :error, "invalid json payload" }    
-    def resolve([], _), do: { :error, "empty payload"}    
-    
-    def resolve(records = [h|t]) do
+    def resolve(records) do
         # stack = %ElixirSenml.ResolverStatus{}
         Enum.reduce(records, %ElixirSenml.ResolverStatus{}, fn record, stack ->
             # remove keys with nil values.
@@ -35,6 +32,8 @@ defmodule ElixirSenml.ResolverStatus do
             |> increment_record_counter()            
         end)
     end
+    def resolve([], _), do: { :error, "empty payload"}    
+    
 
     def process_base_keys(map, stack) do
         stack
@@ -46,22 +45,22 @@ defmodule ElixirSenml.ResolverStatus do
         |> stack_bver?(map)
     end
 
-    def stack_bn?(stack, map = %{ bn: bn }), do: %{ stack | bn: bn }
+    def stack_bn?(stack, %{ bn: bn }), do: %{ stack | bn: bn }
     def stack_bn?(stack, _), do: stack
 
-    def stack_bt?(stack, map = %{ bt: bt }), do: %{ stack | bt: bt }
+    def stack_bt?(stack, %{ bt: bt }), do: %{ stack | bt: bt }
     def stack_bt?(stack, _), do: stack
 
-    def stack_bu?(stack, map = %{ bu: bu }), do: %{ stack | bu: bu }
+    def stack_bu?(stack, %{ bu: bu }), do: %{ stack | bu: bu }
     def stack_bu?(stack, _), do: stack
 
-    def stack_bv?(stack, map = %{ bv: bv }), do: %{ stack | bv: bv }
+    def stack_bv?(stack, %{ bv: bv }), do: %{ stack | bv: bv }
     def stack_bv?(stack, _), do: stack
 
-    def stack_bs?(stack, map = %{ bs: bs }), do: %{ stack | bs: bs }
+    def stack_bs?(stack, %{ bs: bs }), do: %{ stack | bs: bs }
     def stack_bs?(stack, _), do: stack
 
-    def stack_bver?(stack, map = %{ bver: bver }), do: %{ stack | bver: bver }
+    def stack_bver?(stack, %{ bver: bver }), do: %{ stack | bver: bver }
     def stack_bver?(stack, _), do: stack
 
     def increment_record_counter(stack = %{ number_records: number_records }), do: %{ stack | number_records: number_records + 1 } 
