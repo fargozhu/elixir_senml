@@ -1,5 +1,5 @@
 defmodule ElixirSenml do
-  alias ElixirSenml.Resolver
+  alias ElixirSenml.ResolverStatus
 
-  defdelegate resolve(payload), to: Resolver, as: :start_resolve
+  defdelegate resolve(payload), to: ResolverStatus, as: :start_resolve
 end
