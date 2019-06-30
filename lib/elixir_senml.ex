@@ -1,18 +1,5 @@
 defmodule ElixirSenml do
-  @moduledoc """
-  Documentation for ElixirSenml.
-  """
+  alias ElixirSenml.ResolverStatus
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> ElixirSenml.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  defdelegate resolve(payload), to: ResolverStatus, as: :start_resolve
 end
