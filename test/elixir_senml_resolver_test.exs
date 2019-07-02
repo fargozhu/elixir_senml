@@ -31,24 +31,22 @@ defmodule ElixirSenmlResolverTest do
     end
 
     test "create two resolver records with success" do
-        raw_record_1 = %ElixirSenml.Record{
+        raw_record = [%ElixirSenml.Record{
             bn: "urn:dev:ow:10e2073a01080063/",
             bt: 1111.111,
             bs: 12,
             u: "Cel",
             v: 10.10,
-        }
-        
-        raw_record_2 = %ElixirSenml.Record{
+        }, %ElixirSenml.Record{
             n: "name",
             bt: 1111.111,
             bs: 12,
             u: "Cel",
             v: 10.10,
-        }
+        }]
         
         expected_value = 2
-        actual_value = ElixirSenml.Resolver.resolve([raw_record])
+        actual_value = ElixirSenml.Resolver.resolve(raw_record)
 
         assert MapSet.size(actual_value.resolved) == 2
         assert actual_value.number_records == 2
