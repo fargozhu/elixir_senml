@@ -7,6 +7,9 @@ defmodule ElixirSenml.Resolver do
         bn: nil,
         bu: nil,
         bt: nil,
+        bv: nil,
+        bs: nil,
+        bver: nil,
         number_records: 0,
         resolved: MapSet.new()
     )    
@@ -31,7 +34,6 @@ defmodule ElixirSenml.Resolver do
 
 
     def process_fields(record, resolver) do        
-        IO.inspect record
         upset_resolver = process_base_fields(record, resolver)
         resolve_record = process_regular_keys(upset_resolver, record)
 
@@ -44,10 +46,9 @@ defmodule ElixirSenml.Resolver do
         |> base_bn?(rec_struct)        
         |> base_bu?(rec_struct)
         |> base_bt?(rec_struct)
-        
-        #|> stack_bv?(record)
-        #|> stack_bs?(record)
-        #|> stack_bver?(record)
+        |> base_bv?(rec_struct)
+        #|> stack_bs?(rec_struct)
+        #|> stack_bver?(rec_struct)
     end
 
     # todo
@@ -67,6 +68,15 @@ defmodule ElixirSenml.Resolver do
 
     def base_bt?(resolver, %{ bt: bt }), do: %{ resolver | bt: bt }
     def base_bt?(resolver, _), do: resolver
+
+    def base_bv?(resolver, %{ bv: bv }), do: %{ resolver | bv: bv }
+    def base_bv?(resolver, _), do: resolver
+
+    def base_bs?(resolver, %{ bs: bs }), do: %{ resolver | bs: bs }
+    def base_bs?(resolver, _), do: resolver
+
+    def base_ver?(resolver, %{ bver: bver }), do: %{ resolver | bver: bver }
+    def base_ver?(resolver, _), do: resolver
 
     def resolve_name(%{ bn: bn}, %{ n: n }), do: "#{bn}#{n}"
     def resolve_name(%{ bn: bn}, _), do: bn
