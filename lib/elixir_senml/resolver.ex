@@ -58,24 +58,24 @@ defmodule ElixirSenml.Resolver do
         }   
     end
 
-    def base_bn?(resolver, record = %{ bn: bn }), do: %{ resolver | bn: record.bn }
+    def base_bn?(resolver, %{ bn: bn }), do: %{ resolver | bn: bn }
     def base_bn?(resolver, _), do: resolver
 
-    def base_bu?(resolver, record = %{ bu: bu }), do: %{ resolver | bu: record.bu }
+    def base_bu?(resolver, %{ bu: bu }), do: %{ resolver | bu: bu }
     def base_bu?(resolver, _), do: resolver
 
-    def base_bt?(resolver, record = %{ bt: bt }), do: %{ resolver | bt: record.bt }
+    def base_bt?(resolver, %{ bt: bt }), do: %{ resolver | bt: bt }
     def base_bt?(resolver, _), do: resolver
 
     def resolve_name(%{ bn: bn}, %{ n: n }), do: "#{bn}#{n}"
     def resolve_name(%{ bn: bn}, _), do: bn
     def resolve_name(_, %{ n: n }), do: n        
 
-    def resolve_unit(%{ bu: bu}, %{ u: u }), do: u
+    def resolve_unit(%{ bu: _bu}, %{ u: u }), do: u
     def resolve_unit(%{ bu: bu}, _), do: bu
     def resolve_unit(_, %{ u: u }), do: u      
 
-    def resolve_time(%{ bt: bt}, %{ t: t }), do: t
+    def resolve_time(%{ bt: _bt}, %{ t: t }), do: t
     def resolve_time(%{ bt: bt}, _), do: bt
     def resolve_time(_, %{ t: t }), do: t    
 
