@@ -25,6 +25,7 @@ defmodule ElixirSenmlResolverTest do
         actual_value = ElixirSenml.Resolver.resolve([raw_record])
 
         assert MapSet.size(actual_value.resolved) == 1
+        assert actual_value.number_records == 1
         assert expected_value == actual_value.resolved
         
     end

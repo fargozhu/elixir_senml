@@ -27,9 +27,9 @@ defmodule ElixirSenml.Resolver do
         Enum.reduce(records, %ElixirSenml.Resolver{}, fn record, resolver ->
             Map.from_struct(record)
             |> to_compact_map() # returns a struct without the nil value keys
-            |> process_fields(resolver)        
-        end)
-        |> IO.inspect        
+            |> process_fields(resolver)    
+            |> increment_record_counter()    
+        end)     
     end
     def resolve([], _), do: { :error, "empty payload"}    
 
@@ -101,7 +101,7 @@ defmodule ElixirSenml.Resolver do
     def resolve_sum(%{ bs: bs}, _), do: bs
     def resolve_sum(_, %{ s: s }), do: s
 
-    def increment_record_counter(stack = %{ number_records: number_records }), do: %{ stack | number_records: number_records + 1 } 
+    def increment_record_counter(resolver = %{ number_records: number_records }), do: %{ resolver | number_records: number_records + 1 } 
 
     def to_compact_map(map) do
         map
