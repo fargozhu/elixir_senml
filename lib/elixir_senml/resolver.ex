@@ -50,6 +50,7 @@ defmodule ElixirSenml.Resolver do
         #|> stack_bver?(record)
     end
 
+    # todo
     def process_regular_keys(resolver, record) do
         %ResolveRecord{            
             n: resolve_name(resolver, record),
