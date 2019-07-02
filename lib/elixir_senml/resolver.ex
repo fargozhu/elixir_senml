@@ -27,8 +27,9 @@ defmodule ElixirSenml.Resolver do
         Enum.reduce(records, %ElixirSenml.Resolver{}, fn record, resolver ->
             Map.from_struct(record)
             |> to_compact_map() # returns a struct without the nil value keys
-            |> process_fields(resolver)            
-        end)
+            |> process_fields(resolver)    
+            |> increment_record_counter()    
+        end)     
     end
     def resolve([], _), do: { :error, "empty payload"}    
 
@@ -47,8 +48,8 @@ defmodule ElixirSenml.Resolver do
         |> base_bu?(rec_struct)
         |> base_bt?(rec_struct)
         |> base_bv?(rec_struct)
-        #|> stack_bs?(rec_struct)
-        #|> stack_bver?(rec_struct)
+        |> base_bs?(rec_struct)
+        |> base_bver?(rec_struct)
     end
 
     # todo
@@ -56,7 +57,9 @@ defmodule ElixirSenml.Resolver do
         %ResolveRecord{            
             n: resolve_name(resolver, record),
             u: resolve_unit(resolver, record),
-            t: resolve_time(resolver, record),
+            t: resolve_time(resolver, record),   
+            v: resolve_value(resolver, record),   
+            s: resolve_sum(resolver, record),      
         }   
     end
 
@@ -75,8 +78,8 @@ defmodule ElixirSenml.Resolver do
     def base_bs?(resolver, %{ bs: bs }), do: %{ resolver | bs: bs }
     def base_bs?(resolver, _), do: resolver
 
-    def base_ver?(resolver, %{ bver: bver }), do: %{ resolver | bver: bver }
-    def base_ver?(resolver, _), do: resolver
+    def base_bver?(resolver, %{ bver: bver }), do: %{ resolver | bver: bver }
+    def base_bver?(resolver, _), do: resolver
 
     def resolve_name(%{ bn: bn}, %{ n: n }), do: "#{bn}#{n}"
     def resolve_name(%{ bn: bn}, _), do: bn
@@ -90,7 +93,15 @@ defmodule ElixirSenml.Resolver do
     def resolve_time(%{ bt: bt}, _), do: bt
     def resolve_time(_, %{ t: t }), do: t    
 
-    def increment_record_counter(stack = %{ number_records: number_records }), do: %{ stack | number_records: number_records + 1 } 
+    def resolve_value(%{ bv: _bv}, %{ v: v }), do: v
+    def resolve_value(%{ bv: bv}, _), do: bv
+    def resolve_value(_, %{ v: v }), do: v
+
+    def resolve_sum(%{ bs: _bs}, %{ s: s }), do: s
+    def resolve_sum(%{ bs: bs}, _), do: bs
+    def resolve_sum(_, %{ s: s }), do: s
+
+    def increment_record_counter(resolver = %{ number_records: number_records }), do: %{ resolver | number_records: number_records + 1 } 
 
     def to_compact_map(map) do
         map
