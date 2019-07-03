@@ -2,6 +2,8 @@ defmodule ElixirSenml.Resolver do
     alias ElixirSenml.Record
     alias ElixirSenml.ResolveRecord
 
+    @supported_version 12
+
     # keep the state during the resolver loop process
     defstruct(
         bn: nil,
@@ -78,7 +80,7 @@ defmodule ElixirSenml.Resolver do
     def base_bs?(resolver, %{ bs: bs }), do: %{ resolver | bs: bs }
     def base_bs?(resolver, _), do: resolver
 
-    def base_bver?(resolver, %{ bver: bver }), do: %{ resolver | bver: bver }
+    def base_bver?(resolver, %{ bver: bver}), do: %{ resolver | bver: bver }
     def base_bver?(resolver, _), do: resolver
 
     def resolve_name(%{ bn: bn}, %{ n: n }), do: "#{bn}#{n}"
@@ -100,6 +102,15 @@ defmodule ElixirSenml.Resolver do
     def resolve_sum(%{ bs: _bs}, %{ s: s }), do: s
     def resolve_sum(%{ bs: bs}, _), do: bs
     def resolve_sum(_, %{ s: s }), do: s
+
+    def resolve_version(_, %{ bver: bver }) when bver > @supported_version do
+        { :error, "unsupported version" }
+    end
+    def resolve_version(_, %{ bver: bver }) when bver <= @supported_version do
+        bver
+    end
+    def resolve_version(%{ bver: bver}, _), do: bver
+    def resolve_version(_, _), do: @supported_version
 
     def increment_record_counter(resolver = %{ number_records: number_records }), do: %{ resolver | number_records: number_records + 1 } 
 

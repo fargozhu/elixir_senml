@@ -48,8 +48,8 @@ defmodule ElixirSenmlResolverTest do
         expected_value = 2
         actual_value = ElixirSenml.Resolver.resolve(raw_record)
 
-        assert MapSet.size(actual_value.resolved) == 2
-        assert actual_value.number_records == 2
+        assert MapSet.size(actual_value.resolved) == expected_value
+        assert actual_value.number_records == expected_value
     end
 
 
@@ -128,4 +128,11 @@ defmodule ElixirSenmlResolverTest do
         assert 111.111 == Resolver.resolve_time(%{ }, %{ t: 111.111 })
     end
 
+    test "the record bver value is supported" do
+        assert 12 == Resolver.resolve_version(%{ bver: 12 }, %{ bver: 12 })
+    end
+
+    test "the record bver value is not supported" do
+        assert { :error, "unsupported version" } == Resolver.resolve_version(%{ bver: 12 }, %{ bver: 13 })
+    end
 end
