@@ -2,7 +2,6 @@ defmodule ElixirSenmlResolverTest do
   use ExUnit.Case
   alias ElixirSenml.Resolver
   alias ElixirSenml.Record
-  alias ElixirSenml.ResolveRecord
 
   test "create a resolver record with success" do
     raw_record = %ElixirSenml.Record{
@@ -14,7 +13,7 @@ defmodule ElixirSenmlResolverTest do
     }
 
     expected_value =
-      MapSet.put(MapSet.new(), %ElixirSenml.ResolveRecord{
+      MapSet.put(MapSet.new(), %{
         n: raw_record.bn,
         t: raw_record.bt,
         u: raw_record.u,
@@ -85,7 +84,7 @@ defmodule ElixirSenmlResolverTest do
       bver: 12
     }
 
-    expected_value = %ResolveRecord{
+    expected_value = %{
       n: "base-name/name",
       bver: resolver.bver
     }
@@ -99,7 +98,7 @@ defmodule ElixirSenmlResolverTest do
       bver: 12
     }
 
-    expected_value = %ResolveRecord{
+    expected_value = %{
       n: "name",
       bver: resolver.bver
     }

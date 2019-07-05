@@ -1,6 +1,5 @@
 defmodule ElixirSenml.Resolver do
-  alias ElixirSenml.Record
-  alias ElixirSenml.ResolveRecord
+  alias ElixirSenml.Record  
 
   @supported_version 12
 
@@ -22,7 +21,10 @@ defmodule ElixirSenml.Resolver do
   def start_resolve(payload) do
     Poison.decode!(payload, as: [%Record{}])
     |> resolve()
+    |> get_list_resolved_records()    
   end
+
+  def get_list_resolved_records(resolver), do: resolver.resolved
 
   # In case the Poison.decode returns an error
   def resolve(records) do
@@ -39,7 +41,7 @@ defmodule ElixirSenml.Resolver do
 
   def process_fields(record, resolver) do
     upset_resolver = process_base_fields(record, resolver)
-    resolved_record = process_regular_fields(upset_resolver, record)
+    resolved_record = process_regular_fields(upset_resolver, record)    
 
     Map.put(upset_resolver, :resolved, MapSet.put(upset_resolver.resolved, resolved_record))
   end
@@ -62,14 +64,15 @@ defmodule ElixirSenml.Resolver do
          {:ok, s} <- resolve_sum(resolver, record),
          {:ok, bver} <- resolve_base_version(resolver, record) 
     do
-      %ResolveRecord{
+      %{
         n: n,
         u: u,
         t: t,
         v: v,
         s: s,
         bver: bver
-      }      
+      }
+      |> to_compact_map()
     else
       err -> err
     end
