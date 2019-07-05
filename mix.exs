@@ -8,7 +8,7 @@ defmodule ElixirSenml.MixProject do
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      test_coverage: [tool: ExCoveralls],
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -23,7 +23,7 @@ defmodule ElixirSenml.MixProject do
   defp deps do
     [
       {:poison, "~> 4.0"},
-      {:excoveralls, "~> 0.11.1"},
+      {:excoveralls, "~> 0.11.1"}
     ]
   end
 end
