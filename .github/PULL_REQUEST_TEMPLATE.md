@@ -1,30 +1,9 @@
-(Thanks for sending a pull request! Please make sure you click the link above to view the contribution guidelines, then fill out the blanks below.)
+### Description
+Please explain the changes you made here.
 
-What does this implement/fix? Explain your changes.
----------------------------------------------------
-…
-
-Does this close any currently open issues?
-------------------------------------------
-…
-
-
-Any relevant logs, error output, etc?
--------------------------------------
-(If it’s long, please paste to https://ghostbin.com/ and insert the link here.)
-
-Any other comments?
--------------------
-…
-
-Where has this been tested?
----------------------------
-**Operating System:** …
-
-**Platform:** …
-
-**Target Platform:** …
-
-**Toolchain Version:** …
-
-**SDK Version:** …
+### Checklist
+- [ ] Code compiles correctly
+- [ ] Created tests which fail without the change (if possible)
+- [ ] All tests passing
+- [ ] Extended the README / documentation, if necessary
+- [ ] Added myself / the copyright holder to the AUTHORS file
