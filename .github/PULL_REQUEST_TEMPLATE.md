@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!--- Provide a general summary of your changes in the Title above -->
 
 ## Description
@@ -26,3 +27,14 @@
 - [ ] My code follows the code style of this project.
 - [ ] My change requires a change to the documentation.
 - [ ] I have updated the documentation accordingly.
+=======
+### Description
+Please explain the changes you made here.
+
+### Checklist
+- [ ] Code compiles correctly
+- [ ] Created tests which fail without the change (if possible)
+- [ ] All tests passing
+- [ ] Extended the README / documentation, if necessary
+- [ ] Added myself / the copyright holder to the AUTHORS file
+>>>>>>> pr template improvements
