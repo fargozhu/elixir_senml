@@ -18,7 +18,5 @@ defmodule ElixirSenmlTest do
     )
     
     ElixirSenml.resolve(json)
-
-    assert true == true
   end
 end
