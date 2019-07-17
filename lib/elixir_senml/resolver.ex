@@ -21,7 +21,8 @@ defmodule ElixirSenml.Resolver do
   def start_resolve(payload) do
     Poison.decode!(payload, as: [%Record{}])
     |> resolve()
-    |> get_list_resolved_records()    
+    |> get_list_resolved_records()
+    |> MapSet.to_list()    
   end
 
   def get_list_resolved_records(resolver), do: resolver.resolved
@@ -112,6 +113,7 @@ defmodule ElixirSenml.Resolver do
   def resolve_unit(_, %{u: u}), do: {:ok, u}
   def resolve_unit(_, _), do: {:ok, nil}
 
+  def resolve_time(%{bt: nil}, %{t: t}), do: {:ok, t}
   def resolve_time(%{bt: bt}, %{t: t}), do: {:ok, t+bt}
   def resolve_time(%{bt: bt}, _), do: {:ok, bt}
   def resolve_time(_, %{t: t}), do: {:ok, t}
