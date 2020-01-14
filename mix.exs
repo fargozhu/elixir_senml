@@ -23,7 +23,7 @@ defmodule ElixirSenml.MixProject do
   defp deps do
     [
       {:poison, "~> 4.0"},
-      {:excoveralls, "~> 0.11.1"}
+      {:excoveralls, "~> 0.12.1"}
     ]
   end
 end
