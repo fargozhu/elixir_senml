@@ -9,7 +9,7 @@ defmodule ElixirSenmlResolverTest do
       bt: 1111.111,
       bs: 12,
       u: "Cel",
-      v: 10.10
+      v: 10.19
     }
 
     expected_value =
