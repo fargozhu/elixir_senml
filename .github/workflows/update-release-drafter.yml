@@ -1,4 +1,4 @@
-name: PR Verification
+name: Update Release Notes
 on:
   push:
     branches:
@@ -7,12 +7,6 @@ jobs:
   update_release_draft:
     runs-on: ubuntu-latest
     steps:
-    - name: Set PR labels based on PR title
-      uses: TDAK1509/set-label-based-on-pr-title@v1.1
-      with:
-        words: feat;bug
-        labels: enhancement;bug
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
     - name: add to the release draft
       uses: release-drafter/release-drafter@v5
       env:
