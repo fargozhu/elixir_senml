@@ -1,4 +1,4 @@
-name: Update-Release-Drafter
+name: PR Verification
 on:
   push:
     branches:
@@ -10,10 +10,10 @@ jobs:
     - name: Set PR labels based on PR title
       uses: TDAK1509/set-label-based-on-pr-title@v1.1
       with:
-          words: feat;bug
-          labels: enhancement;bug
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+        words: feat;bug
+        labels: enhancement;bug
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
     - name: add to the release draft
       uses: release-drafter/release-drafter@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
