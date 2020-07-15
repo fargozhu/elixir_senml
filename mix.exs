@@ -22,8 +22,8 @@ defmodule ElixirSenml.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:poison, "~> 4.0"},
-      {:excoveralls, "~> 0.13.0"}
+      {:poison, "~> 5.0"},
+      {:excoveralls, "~> 0.12.0"}
     ]
   end
 end
