@@ -3,5 +3,5 @@ defmodule ElixirSenml do
 
   defdelegate resolve(payload), to: Resolver, as: :start_resolve
   defdelegate unresolve(payload), to: Resolver, as: :stop_resolve
-  
+  defdelegate awesome(payload), to: Resolver, as: :stop_resolve
 end
