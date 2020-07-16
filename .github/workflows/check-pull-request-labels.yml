@@ -1,7 +1,9 @@
 name: Auto filling pull request
 on:
   pull_request:
-    types: [opened]
+    types:
+      - opened
+      - edited
 jobs:
   auto-filling-pull-request:
     runs-on: ubuntu-latest
