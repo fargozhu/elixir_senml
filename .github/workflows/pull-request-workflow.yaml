@@ -13,6 +13,6 @@ jobs:
       - name: Add labels based on pull request title
         uses: TDAK1509/set-label-based-on-pr-title@v1.1
         with:
-          words: feat;fix;maint
-          labels: enhancement;bug;chore
+          words: feat;maint
+          labels: enhancement;chore
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
