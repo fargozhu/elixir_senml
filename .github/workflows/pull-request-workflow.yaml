@@ -14,5 +14,5 @@ jobs:
         uses: TDAK1509/set-label-based-on-pr-title@v1.1
         with:
           words: feat;bug
-          labels: "Type: Enhancement";"Type: Bug"
+          labels: "Type: Enhancement"; "Type: Bug"
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
